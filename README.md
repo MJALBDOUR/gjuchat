@@ -24,6 +24,7 @@ Back End
 Front End
 - Bootstrap
 - Javascript
+- JQuery
 - HTML
 - CSS
 - EJS
