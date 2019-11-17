@@ -32,4 +32,8 @@ DBMS
 - MongoDB
 - Mongoose
 
-will continue writing the readme in a bit...
+# git branches
+- Master
+- Develop
+- Feature
+- Release
