@@ -34,7 +34,8 @@ DBMS
 - Mongoose
 
 # git branches
+This is a non-commercial project, no need for Hot-fix or release branches, feature branches are merged with develop once done
 - Master
 - Develop
 - Feature
-- Release
+
