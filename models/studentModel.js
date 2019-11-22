@@ -93,10 +93,10 @@ let studentSchema = new Schema(
 );
 
 studentSchema.virtual("firstLastName").get(function() {
-  return `${this.personalInformation.name.firstName} ${this.personalInformation.name.last}`;
+  return `${this.personalInformation.name.firstName} ${this.personalInformation.name.lastName}`;
 });
 
 studentSchema.virtual("fullName").get(function() {
-  return `${this.personalInformation.name.firstName} ${this.personalInformation.name.fatherName} ${this.personalInformation.name.grandfatherName} ${this.personalInformation.name.last}`;
+  return `${this.personalInformation.name.firstName} ${this.personalInformation.name.fatherName} ${this.personalInformation.name.grandfatherName} ${this.personalInformation.name.lastName}`;
 });
 module.exports = mongoose.model("Student", studentSchema);
