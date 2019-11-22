@@ -53,6 +53,9 @@ let studentSchema = new Schema(
     },
     contactInformation: {
       required: true,
+      hashPassword: {
+        type: String
+      },
       gjuEmail: {
         type: String,
         lowercase: true,
