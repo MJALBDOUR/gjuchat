@@ -10,14 +10,19 @@ let messageSchema = new Schema(
       required: true
     },
 
-    userName: {
+    username: {
       type: String,
       unique: true,
       required: true
     },
     sender: {
       type: Schema.Types.ObjectId,
-      ref: "Sender", // no sure about this so far
+      ref: "Sender",
+      required: true
+    },
+    course: {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
       required: true
     }
   },
