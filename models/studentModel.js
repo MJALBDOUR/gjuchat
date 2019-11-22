@@ -11,7 +11,8 @@ let studentSchema = new Schema(
         type: Number,
         min: 20050000000,
         max: 29999999999,
-        required: true
+        required: true,
+        unique: true
       },
       name: {
         required: true,
@@ -65,11 +66,11 @@ let studentSchema = new Schema(
         lowercase: true,
         required: [true, "can't be blank"],
         match: [/\S+@\S+\.\S+/, "is invalid"],
-        index: true,
         unique: true
       },
       mobileNumber: {
-        type: Number
+        type: Number,
+        unique: true
       },
       address: {
         street: {
