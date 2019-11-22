@@ -5,8 +5,9 @@ const mongoose = require("mongoose"),
 
 let courseSchema = new Schema(
   {
-    idNumber: {
+    courseId: {
       type: Number,
+      min: 0,
       required: true,
       unique: true
     },
@@ -22,8 +23,8 @@ let courseSchema = new Schema(
       required: true
     },
 
-    students: [{ type: Schema.Types.ObjectId, ref: "Student" }],
-    teachers: [{ type: Schema.Types.ObjectId, ref: "Teacher" }],
+    students: [{ type: Schema.Types.ObjectId, ref: "Student", min: 0 }],
+    teachers: [{ type: Schema.Types.ObjectId, ref: "Teacher", min: 0 }],
     messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
   },
   {
