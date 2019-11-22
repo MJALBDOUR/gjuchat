@@ -51,6 +51,31 @@ let studentSchema = new Schema(
         default: "single"
       }
     },
+    academicInformation: {
+      required: true,
+      degree: {
+        type: String,
+        default: "bachelor"
+      },
+      faculty: {
+        type: String
+      },
+      department: {
+        type: String
+      },
+      major: {
+        type: String
+      },
+      program: {
+        type: String
+      },
+      courses: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Course"
+        }
+      ]
+    },
     contactInformation: {
       required: true,
       hashPassword: {
