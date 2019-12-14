@@ -5,7 +5,6 @@
 # Project active link comming soon
 
 I created this project for my Software Engineering course during school.
-They can use this app instead of emails, or as a way to chat/discuss any course that they're connected to.
 
 # Features
 - Real Time connectivity
