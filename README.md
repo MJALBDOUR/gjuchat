@@ -1,40 +1,32 @@
 # gjuchat
 ------
-# Real Time chat Web App for students and teachers
+# Real Time Chat App for Students
 
 # Project active link comming soon
+
+# Project was re-written in Flutter ^__^
 
 I created this project for my Software Engineering course during school.
 
 # Features
 - Real Time connectivity
 - Authentication
-- Text Messages/other types to be determined
+- Text Messages
 - Administration
-- Responsive Design
-- MVC
+- Android
+- iOS
 
 # Tech Stack
-Back End
-- Node
-- Express
-- Javascript
+Back End - Firebase ( Minimum Headache, Smooth & Fast )
+- Cloud Firestore
+- Auth/other Firebase APIs
 
 Front End
-- Bootstrap
-- Javascript
-- JQuery
-- HTML
-- CSS
-- EJS
+- Flutter - Dart ( Amazing solution to build cross-platform applications )
 
-DBMS
-- MongoDB
-- Mongoose
+Design
+- Logo --> Adobe Illustrator
+- App  --> Adobe XD
+- Material Design ( Absolutely loved it! )
 
-# git branches
-This is a non-commercial project, no need for Hot-fix or release branches
-- Master
-- Develop
-- Feature
-
+updates are comming...
