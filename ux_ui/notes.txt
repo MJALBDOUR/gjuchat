@@ -1,0 +1,5 @@
+TU DEC 17TH '19
+use material design ui kit for everything
+then substitute specific elements with custom ones
+
+overall theme --> Normal Material, cut = 0 dp (rectangle without cuts)
