@@ -2,9 +2,9 @@
 ------
 # Real Time Chat App for Students
 
-# Project active link comming soon
+- Project active link comming soon
 
-# Project was re-written in Flutter ^__^
+- Project was re-written in Flutter ^__^
 
 I created this project for my Software Engineering course during school.
 
