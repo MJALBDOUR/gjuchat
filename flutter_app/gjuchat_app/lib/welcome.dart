@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gjuchat_app/colors.dart';
-import 'package:gjuchat_app/login.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
