@@ -25,8 +25,8 @@ Front End
 - Flutter - Dart ( Amazing solution to build cross-platform applications )
 
 Design
-- Logo --> Adobe Illustrator
-- App  --> Adobe XD
+- Logo - Adobe Illustrator
+- App  - Adobe XD
 - Material Design ( Absolutely loved it! )
 
 updates are comming...
