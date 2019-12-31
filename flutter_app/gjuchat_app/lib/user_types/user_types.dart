@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gjuchat_app/colors.dart';
-import 'package:gjuchat_app/welcome.dart';
+//import 'package:gjuchat_app/welcome.dart';
 
 class UserTypes extends StatefulWidget {
   @override

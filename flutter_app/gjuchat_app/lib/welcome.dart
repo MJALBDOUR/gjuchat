@@ -65,7 +65,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               color: kGJUChatOrange,
               textColor: Colors.white,
               child: Text(
-                'Let\'s Chat',
+                'Let\'s Chat!',
                 style: TextStyle(fontSize: 18.0),
               ),
             ),

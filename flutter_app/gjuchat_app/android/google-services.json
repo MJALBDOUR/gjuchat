@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "26246857277",
+    "firebase_url": "https://gjuchat-6815c.firebaseio.com",
+    "project_id": "gjuchat-6815c",
+    "storage_bucket": "gjuchat-6815c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26246857277:android:b55f09df9f895f28812054",
+        "android_client_info": {
+          "package_name": "gjuchatapp.mjalbdour.gjuchat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26246857277-9mrrb3eekk15s1pma00dj4ov5kehs8vm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb00bj5VKFTPK8iZE70lRsH5CCGhHuU1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26246857277-9mrrb3eekk15s1pma00dj4ov5kehs8vm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

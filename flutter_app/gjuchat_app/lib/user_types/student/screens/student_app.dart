@@ -39,15 +39,28 @@ class _StudentAppState extends State<StudentApp> {
                 ),
                 onPressed: () {
 //                  TODO: show sign out warning
+//                TODO: if sign out is tapped --> exit then show "thankyou" screen
                 },
               )
             ],
           ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-          ),
+          body: ListView(padding: EdgeInsets.all(16.0), children: courses()),
         ),
       ),
     );
   }
+}
+
+// create a function that returns a ListTile --> each list tile is a course comming from firebase.
+
+List<ListTile> courses() {
+  List<ListTile> coursesList = [];
+  ListTile course;
+//  TODO: Get courses from db and store them
+  // for() {
+//    TODO: Get course from db
+//  TODO: dont forget to add the onTap Callback to each ListTile where it takes the student to the chat screen
+//  TODO: Append it to the coursesList
+  //}
+  return coursesList;
 }
