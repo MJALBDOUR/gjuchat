@@ -32,16 +32,6 @@ class _StudentAppState extends State<StudentApp> {
 //                TODO: Go to profile
                 },
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.close,
-                  color: Colors.grey,
-                ),
-                onPressed: () {
-//                  TODO: show sign out warning
-//                TODO: if sign out is tapped --> exit then show "thankyou" screen
-                },
-              )
             ],
           ),
           body: ListView(padding: EdgeInsets.all(16.0), children: courses()),
