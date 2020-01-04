@@ -1,74 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:gjuchat/colors.dart';
+import 'package:gjuchat/login.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  static const String id = 'welcome_screen';
+class Welcome extends StatefulWidget {
+  static const String id = 'welcome';
 
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _WelcomeState createState() => _WelcomeState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            Text(
+              'Welcome to',
+              textAlign: TextAlign.center,
+            ),
+            Text('GJUChat!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 32.0,
+                )),
             SizedBox(
-              height: 96.0,
+              height: 16.0,
             ),
-            Container(
-              child: Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'Welcome',
-                      style: TextStyle(
-                        fontSize: 48.0,
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      'to',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      'GJUChat!',
-                      style: TextStyle(
-                        fontSize: 60.0,
-                        fontWeight: FontWeight.w300,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
+            Image.asset(
+              'assets/images/logo.png',
+              height: 150.0,
             ),
-            SizedBox(height: 32.0),
-            Container(
-              height: 200.0,
-              child: Image.asset('assets/images/logo.png'),
-            ),
-            SizedBox(height: 56.0),
-            RaisedButton(
-              padding: EdgeInsets.all(18.0),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              color: kGJUChatOrange,
-              textColor: Colors.white,
-              child: Text(
-                'Let\'s Chat!',
-                style: TextStyle(fontSize: 18.0),
-              ),
-            ),
+            SizedBox(height: 16.0),
+            Align(
+              alignment: Alignment.center,
+              child: RaisedButton(
+                  color: kGJUChatOrange,
+                  child: Text('NEXT', style: TextStyle(color: Colors.white)),
+                  onPressed: () {
+//              TODO: Go to Login
+                    Navigator.pushNamed(context, Login.id);
+                  }),
+            )
           ],
         ),
       ),

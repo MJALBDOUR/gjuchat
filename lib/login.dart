@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gjuchat/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:gjuchat/courses.dart';
+
 // TODO: Add firebase auth
 
 class Login extends StatefulWidget {
+  static const String id = 'login';
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,9 +25,19 @@ class _LoginState extends State<Login> {
             child: Center(
               child: ListView(
                 children: <Widget>[
+                  SizedBox(
+                    height: 100.0,
+                  ),
+                  Text(
+                    'Please Log In',
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 16.0,
+                  ),
                   Icon(Icons.account_circle),
                   SizedBox(
-                    height: 32.0,
+                    height: 16.0,
                   ),
                   Text(
                     'GJUChat_',
@@ -43,6 +60,9 @@ class _LoginState extends State<Login> {
                     autofocus: true,
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: kGJUChatOrange,
+                    onChanged: (value) {
+                      email = value;
+                    },
                   ),
                   TextField(
                     decoration: InputDecoration(hintText: 'Password'),
@@ -50,6 +70,9 @@ class _LoginState extends State<Login> {
                     obscureText: true,
                     keyboardType: TextInputType.emailAddress,
                     cursorColor: kGJUChatOrange,
+                    onChanged: (value) {
+                      password = value;
+                    },
                   ),
                   ButtonBar(
                     children: <Widget>[
@@ -59,15 +82,36 @@ class _LoginState extends State<Login> {
                             style: TextStyle(color: Colors.white)),
                         onPressed: () {
 //                        TODO: Empty text fields
+                          setState(() {
+                            email = '';
+                            password = '';
+                          });
                         },
                         disabledColor: Colors.black,
                       ),
                       RaisedButton(
                         color: kGJUChatOrange,
-                        child:
-                            Text('NEXT', style: TextStyle(color: Colors.white)),
-                        onPressed: () {
+                        child: Text('LOG IN',
+                            style: TextStyle(color: Colors.white)),
+                        onPressed: () async {
 //                        TODO: Perform authentication
+                          setState(() {
+//                            TODO: SHOW SPINNER DURING AUTH
+                          });
+
+                          try {
+                            final user = await _auth.signInWithEmailAndPassword(
+                                email: email, password: password);
+                            if (user != null) {
+                              Navigator.pushNamed(context, Courses.id);
+                            }
+
+                            setState(() {
+//                            TODO: HIDE SPINNER
+                            });
+                          } catch (e) {
+                            print(e);
+                          }
                         },
                       ),
                     ],
