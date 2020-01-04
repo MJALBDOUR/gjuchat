@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gjuchat/colors.dart';
 import 'package:gjuchat/login.dart';
 
+//TODO: FIX HERO TRANSITION
+
 class Welcome extends StatefulWidget {
   static const String id = 'welcome';
 
@@ -31,9 +33,11 @@ class _WelcomeState extends State<Welcome> {
             SizedBox(
               height: 16.0,
             ),
-            Image.asset(
-              'assets/images/logo.png',
+            Container(
               height: 150.0,
+              child: Image.asset(
+                'assets/images/logo.png',
+              ),
             ),
             SizedBox(height: 16.0),
             Align(
