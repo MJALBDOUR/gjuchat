@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:26246857277:android:3462fe13763c2bf6812054",
+        "mobilesdk_app_id": "1:26246857277:android:32bee252cce0d1bf812054",
         "android_client_info": {
           "package_name": "mjalbdour.gjuchat"
         }
@@ -40,10 +40,10 @@
               "client_type": 3
             },
             {
-              "client_id": "26246857277-7ectihe24s5aohhe3le4kevk36muuj4s.apps.googleusercontent.com",
+              "client_id": "26246857277-li55qq67nkm3m67sa2afracm3dv27dbm.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "gjuchatapp.mjalbdour.gjuchatApp"
+                "bundle_id": "mjalbdour.gjuchat"
               }
             }
           ]

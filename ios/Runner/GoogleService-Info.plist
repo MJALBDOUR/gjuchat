@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:26246857277:ios:dc73efb2d0ac1044812054</string>
+	<string>1:26246857277:ios:df33adb6a45d3a12812054</string>
 	<key>DATABASE_URL</key>
 	<string>https://gjuchat-6815c.firebaseio.com</string>
 </dict>
