@@ -109,11 +109,10 @@ class _LoginState extends State<Login> {
                             try {
                               final user =
                                   await _auth.signInWithEmailAndPassword(
-                                      email: email, password: password);
+                                      email: email.trim(), password: password);
                               if (user != null) {
                                 Navigator.pushNamed(context, Courses.id);
                               }
-
                               setState(() {
 //                            TODO: HIDE SPINNER
                                 spinner = false;

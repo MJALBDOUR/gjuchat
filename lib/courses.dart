@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gjuchat/profile.dart';
 
-//final _firestore = Firestore.instance;
+final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 
 class Courses extends StatefulWidget {
@@ -15,9 +15,10 @@ class Courses extends StatefulWidget {
 }
 
 class _CoursesState extends State<Courses> {
+  final _auth = FirebaseAuth.instance;
+
   @override
   void initState() {
-    // TODO: implement initState
     getCurrentUser();
     super.initState();
   }
@@ -33,7 +34,6 @@ class _CoursesState extends State<Courses> {
     }
   }
 
-  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -79,11 +79,16 @@ class CoursesStream extends StatelessWidget {
             ));
           default:
             return ListView(
+              padding: EdgeInsets.all(16.0),
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
                 return ListTile(
-                  title: Text(document['course']),
-                  subtitle: Text(document['messages'].last),
+                  onTap: () {
+//                    TODO: Push navigator context --> chat of this course
+                  },
+                  title: Text(document['name']),
+//                 TODO: Then fetch the last message/display it as a subtitle
+//                  subtitle: Text(document['messages'][0]['text']),
                 );
               }).toList(),
             );

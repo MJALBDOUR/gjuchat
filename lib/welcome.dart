@@ -24,6 +24,7 @@ class _WelcomeState extends State<Welcome> {
             Text(
               'Welcome to',
               textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18.0),
             ),
             Text('GJUChat!',
                 textAlign: TextAlign.center,
