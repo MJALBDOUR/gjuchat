@@ -4,6 +4,7 @@ import 'package:gjuchat/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gjuchat/profile.dart';
+import 'package:gjuchat/chat.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -68,7 +69,7 @@ class CoursesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('courses').snapshots(),
+      stream: _firestore.collection('courses').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
@@ -79,16 +80,21 @@ class CoursesStream extends StatelessWidget {
             ));
           default:
             return ListView(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(vertical: 16.0),
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
                 return ListTile(
                   onTap: () {
 //                    TODO: Push navigator context --> chat of this course
+//                    TODO: not working, no access to navigator??
+                    Navigator.pushNamed(context, Chat.id);
                   },
                   title: Text(document['name']),
-//                 TODO: Then fetch the last message/display it as a subtitle
-//                  subtitle: Text(document['messages'][0]['text']),
+//                 TODO: Then fetch the last message/display it as a subtitle/or just display number of messages
+                  subtitle: Text(
+                    document['messages'].length.toString(),
+                    style: TextStyle(color: kGJUChatOrange),
+                  ),
                 );
               }).toList(),
             );

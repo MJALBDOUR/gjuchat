@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Course extends StatefulWidget {
-  static String id = 'course';
+  static const String id = 'course';
   @override
   _CourseState createState() => _CourseState();
 }
