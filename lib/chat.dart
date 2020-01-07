@@ -94,7 +94,12 @@ class _ChatState extends State<Chat> {
                   )),
                   FlatButton(
                     onPressed: () {
+//                      TODO: Clear textfield using a messageTextController.clear()
 //                    TODO Send message if not empty...
+                      _firestore.collection('messages').add({
+                        'text': messageText,
+                        'sender': loggedInUser.email,
+                      });
                     },
                     child: Icon(
                       Icons.send,
@@ -115,7 +120,7 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: course.collection('messages').snapshots(),
+      stream: _firestore.collection('messages').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
