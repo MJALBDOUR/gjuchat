@@ -19,9 +19,11 @@ class Chat extends StatefulWidget {
 }
 
 class _ChatState extends State<Chat> {
+  final TextEditingController messageTextFieldController =
+      TextEditingController();
+
   String courseID;
   final _auth = FirebaseAuth.instance;
-  final messageTextController = TextEditingController();
   String messageText;
 
   _ChatState({@required this.courseID});
@@ -65,7 +67,7 @@ class _ChatState extends State<Chat> {
             icon: Icon(Icons.info),
             onPressed: () {
 //                TODO: Go to course info
-              Navigator.pushNamed(context, Course.id);
+              Navigator.pushNamed(context, Profile.id);
             },
           ),
           IconButton(
@@ -78,56 +80,61 @@ class _ChatState extends State<Chat> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          MessagesStream(courseID: courseID),
-          Container(
-            padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-            color: kGJUChatBlue,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                    child: TextField(
-                  onChanged: (value) {
-                    messageText = value;
-                  },
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                  cursorColor: kGJUChatOrange,
-                  decoration: InputDecoration(
-                    hintText: 'Enter Message...',
-                  ),
-                )),
-                FlatButton(
-                  onPressed: () {
-//                      TODO: Clear textfield using a messageTextController.clear()
-                    messageTextController.clear();
-                    if (messageText != '') {
-//                    TODO Send message if not empty...
-                      _firestore
-                          .collection('courses')
-                          .document(courseID)
-                          .collection('messages')
-                          .add({
-                        'text': messageText,
-                        'sender': loggedInUser.email,
-                        'date': DateTime.now(),
-                      });
-                    }
-                  },
-                  child: Icon(
-                    Icons.send,
-                    color: kGJUChatOrange,
-                  ),
-                ),
-              ],
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            MessagesStream(
+              courseID: courseID,
             ),
-          ),
-        ],
+            Container(
+              padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+              color: kGJUChatBlue,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                      child: TextField(
+                    controller: messageTextFieldController,
+                    onChanged: (value) {
+                      messageText = value;
+                    },
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    cursorColor: kGJUChatOrange,
+                    decoration: InputDecoration(
+                      hintText: 'Enter Message...',
+                    ),
+                  )),
+                  FlatButton(
+                    onPressed: () {
+//                      TODO: Clear textfield using a messageTextController.clear()
+                      messageTextFieldController.clear();
+                      if (messageText != '') {
+//                    TODO Send message if not empty...
+                        _firestore
+                            .collection('courses')
+                            .document(courseID)
+                            .collection('messages')
+                            .add({
+                          'text': messageText,
+                          'sender': loggedInUser.email,
+                          'time': DateTime.now(),
+                        });
+                      }
+                    },
+                    child: Icon(
+                      Icons.send,
+                      color: kGJUChatOrange,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -153,23 +160,23 @@ class MessagesStream extends StatelessWidget {
             ),
           );
         }
-        final messages = snapshot.data.documents.reversed;
+        final messages = snapshot.data.documents;
         List<MessageBubble> messageBubbles = [];
         for (var message in messages) {
-          final messageText = message.data['text'].toString();
-          final messageSender = message.data['sender'].toString();
-          final date = message.data['date'].toString();
-
+          final messageText = message.data['text'];
+          final messageSender = message.data['sender'];
+          final messageTime = message.data['time'];
           final currentUser = loggedInUser.email;
 
           final messageBubble = MessageBubble(
             sender: messageSender,
             text: messageText,
-            date: date,
+            time: messageTime,
             isMe: currentUser == messageSender,
           );
 
           messageBubbles.add(messageBubble);
+          messageBubbles.sort((a, b) => b.time.compareTo(a.time));
         }
         return Expanded(
           child: ListView(
@@ -184,11 +191,11 @@ class MessagesStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.sender, this.text, this.date, this.isMe});
+  MessageBubble({this.sender, this.text, this.time, this.isMe});
 
   final String sender;
   final String text;
-  final String date;
+  final Timestamp time;
   final bool isMe;
 
   @override
@@ -221,9 +228,11 @@ class MessageBubble extends StatelessWidget {
             ),
           ),
           Text(
-            date,
+            time.toDate().hour.toString() +
+                ':' +
+                time.toDate().minute.toString(),
             textAlign: isMe ? TextAlign.end : TextAlign.start,
-            style: TextStyle(color: Colors.black54),
+            style: TextStyle(color: Colors.black54, fontSize: 12.0),
           ),
         ],
       ),

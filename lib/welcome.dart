@@ -34,10 +34,13 @@ class _WelcomeState extends State<Welcome> {
             SizedBox(
               height: 16.0,
             ),
-            Container(
-              height: 150.0,
-              child: Image.asset(
-                'assets/images/logo.png',
+            Hero(
+              tag: 'logo',
+              child: Container(
+                height: 150.0,
+                child: Image.asset(
+                  'assets/images/logo.png',
+                ),
               ),
             ),
             SizedBox(height: 16.0),

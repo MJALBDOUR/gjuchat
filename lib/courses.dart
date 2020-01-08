@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gjuchat/profile.dart';
 import 'package:gjuchat/chat.dart';
-//import 'package:gjuchat/course.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
@@ -45,7 +44,8 @@ class _CoursesState extends State<Courses> {
           backgroundColor: Colors.white,
           leading: Padding(
             padding: const EdgeInsets.only(left: 16.0),
-            child: Image.asset('assets/images/logo.png'),
+            child:
+                Hero(tag: 'logo', child: Image.asset('assets/images/logo.png')),
           ),
           title: Text('Courses', style: TextStyle(color: Colors.black54)),
           actions: <Widget>[
@@ -83,7 +83,6 @@ class CoursesStream extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 16.0),
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
-                print(document.documentID);
                 return ListTile(
                   onTap: () {
                     Navigator.push(

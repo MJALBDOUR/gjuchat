@@ -57,9 +57,12 @@ class _LoginState extends State<Login> {
                   SizedBox(
                     height: 32.0,
                   ),
-                  Container(
-                    height: 100.0,
-                    child: Image.asset('assets/images/logo.png'),
+                  Hero(
+                    tag: 'logo',
+                    child: Container(
+                      height: 100.0,
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
                   ),
                   SizedBox(
                     height: 32.0,
