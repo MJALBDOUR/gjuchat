@@ -8,18 +8,23 @@ import 'package:gjuchat/course.dart';
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 
-final course = _firestore.collection('courses').document('cs342');
-
 class Chat extends StatefulWidget {
+  final String courseID;
   static const String id = 'chat';
+
+  Chat({this.courseID});
+
   @override
-  _ChatState createState() => _ChatState();
+  _ChatState createState() => _ChatState(courseID: courseID);
 }
 
 class _ChatState extends State<Chat> {
+  String courseID;
   final _auth = FirebaseAuth.instance;
-
+  final messageTextController = TextEditingController();
   String messageText;
+
+  _ChatState({@required this.courseID});
 
   @override
   void initState() {
@@ -52,7 +57,7 @@ class _ChatState extends State<Chat> {
             color: kGJUChatBlue,
             icon: Icon(Icons.arrow_back_ios),
           ),
-          title: Text(course.documentID,
+          title: Text(courseID,
               style: TextStyle(
                   color: Colors.black54)), // TODO: send from previous page,
           actions: <Widget>[
@@ -78,7 +83,7 @@ class _ChatState extends State<Chat> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessagesStream(),
+            MessagesStream(courseID: courseID),
             Container(
               padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
               color: kGJUChatBlue,
@@ -87,19 +92,33 @@ class _ChatState extends State<Chat> {
                 children: <Widget>[
                   Expanded(
                       child: TextField(
+                    onChanged: (value) {
+                      messageText = value;
+                    },
                     style: TextStyle(
                       color: Colors.white,
                     ),
                     cursorColor: kGJUChatOrange,
+                    decoration: InputDecoration(
+                      hintText: 'Enter Message...',
+                    ),
                   )),
                   FlatButton(
                     onPressed: () {
 //                      TODO: Clear textfield using a messageTextController.clear()
+                      messageTextController.clear();
+                      if (messageText != '') {
 //                    TODO Send message if not empty...
-                      _firestore.collection('messages').add({
-                        'text': messageText,
-                        'sender': loggedInUser.email,
-                      });
+                        _firestore
+                            .collection('courses')
+                            .document(courseID)
+                            .collection('messages')
+                            .add({
+                          'text': messageText,
+                          'sender': loggedInUser.email,
+                          'date': DateTime.now(),
+                        });
+                      }
                     },
                     child: Icon(
                       Icons.send,
@@ -116,30 +135,39 @@ class _ChatState extends State<Chat> {
   }
 }
 
+// ERROR is generated due to this class,"type 'Document reference' is not a subtype of type String
 class MessagesStream extends StatelessWidget {
+  final String courseID;
+  MessagesStream({@required this.courseID});
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _firestore.collection('messages').snapshots(),
+      stream: _firestore
+          .collection('courses')
+          .document(courseID)
+          .collection('messages')
+          .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return Center(
             child: CircularProgressIndicator(
-              backgroundColor: kGJUChatBlue,
+              backgroundColor: Colors.lightBlueAccent,
             ),
           );
         }
         final messages = snapshot.data.documents.reversed;
         List<MessageBubble> messageBubbles = [];
         for (var message in messages) {
-          final messageText = message.data['text'];
-          final messageSender = message.data['sender'];
+          final messageText = message.data['text'].toString();
+          final messageSender = message.data['sender'].toString();
+          final date = message.data['date'].toString();
 
           final currentUser = loggedInUser.email;
 
           final messageBubble = MessageBubble(
             sender: messageSender,
             text: messageText,
+            date: date,
             isMe: currentUser == messageSender,
           );
 
@@ -158,10 +186,11 @@ class MessagesStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  MessageBubble({this.sender, this.text, this.isMe});
+  MessageBubble({this.sender, this.text, this.date, this.isMe});
 
   final String sender;
   final String text;
+  final String date;
   final bool isMe;
 
   @override
@@ -176,7 +205,7 @@ class MessageBubble extends StatelessWidget {
             sender,
             style: TextStyle(
               fontSize: 12.0,
-              color: Colors.white,
+              color: Colors.black54,
             ),
           ),
           Material(
@@ -192,6 +221,11 @@ class MessageBubble extends StatelessWidget {
                 ),
               ),
             ),
+          ),
+          Text(
+            date,
+            textAlign: isMe ? TextAlign.end : TextAlign.start,
+            style: TextStyle(color: Colors.black54),
           ),
         ],
       ),

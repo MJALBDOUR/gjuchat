@@ -3,7 +3,9 @@ import 'package:gjuchat/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:gjuchat/courses.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'package:gjuchat/chat.dart';
+//import 'package:gjuchat/chat.dart';
+//import 'package:gjuchat/profile.dart';
+//import 'package:gjuchat/course.dart';
 
 // TODO: Add firebase auth DONE, fix it, not working
 // TODO: FIX HERO TRANSITION
@@ -15,6 +17,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
   bool spinner = false;
   final _auth = FirebaseAuth.instance;
   String email;
@@ -89,10 +93,6 @@ class _LoginState extends State<Login> {
                               style: TextStyle(color: Colors.white)),
                           onPressed: () {
 //                        TODO: Empty text fields
-                            setState(() {
-                              email = '';
-                              password = '';
-                            });
                           },
                           disabledColor: Colors.black,
                         ),
@@ -112,7 +112,7 @@ class _LoginState extends State<Login> {
                                   await _auth.signInWithEmailAndPassword(
                                       email: email.trim(), password: password);
                               if (user != null) {
-                                Navigator.pushNamed(context, Chat.id);
+                                Navigator.pushNamed(context, Courses.id);
                               }
                               setState(() {
 //                            TODO: HIDE SPINNER

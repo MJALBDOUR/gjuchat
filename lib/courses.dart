@@ -5,12 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gjuchat/profile.dart';
 import 'package:gjuchat/chat.dart';
+//import 'package:gjuchat/course.dart';
 
 final _firestore = Firestore.instance;
 FirebaseUser loggedInUser;
 
 class Courses extends StatefulWidget {
   static const String id = 'courses';
+
   @override
   _CoursesState createState() => _CoursesState();
 }
@@ -83,16 +85,19 @@ class CoursesStream extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 16.0),
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
+                print(document.documentID);
                 return ListTile(
                   onTap: () {
-//                    TODO: Push navigator context --> chat of this course
-//                    TODO: not working, no access to navigator??
-                    Navigator.pushNamed(context, Chat.id);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Chat(courseID: document.documentID)));
                   },
                   title: Text(document['name']),
 //                 TODO: Then fetch the last message/display it as a subtitle/or just display number of messages
                   subtitle: Text(
-                    document['messages'].length.toString(),
+                    document.documentID.toString(),
                     style: TextStyle(color: kGJUChatOrange),
                   ),
                 );
