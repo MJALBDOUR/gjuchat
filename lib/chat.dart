@@ -45,91 +45,89 @@ class _ChatState extends State<Chat> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            onPressed: () {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
 //              TODO: Pop context from navigator stack
-              Navigator.pop(context);
-            },
+            Navigator.pop(context);
+          },
+          color: kGJUChatBlue,
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+        title: Text(courseID,
+            style: TextStyle(
+                color: Colors.black54)), // TODO: send from previous page,
+        actions: <Widget>[
+          IconButton(
             color: kGJUChatBlue,
-            icon: Icon(Icons.arrow_back_ios),
-          ),
-          title: Text(courseID,
-              style: TextStyle(
-                  color: Colors.black54)), // TODO: send from previous page,
-          actions: <Widget>[
-            IconButton(
-              color: kGJUChatBlue,
-              icon: Icon(Icons.info),
-              onPressed: () {
+            icon: Icon(Icons.info),
+            onPressed: () {
 //                TODO: Go to course info
-                Navigator.pushNamed(context, Course.id);
-              },
-            ),
-            IconButton(
-              color: kGJUChatBlue,
-              icon: Icon(Icons.account_circle),
-              onPressed: () {
+              Navigator.pushNamed(context, Course.id);
+            },
+          ),
+          IconButton(
+            color: kGJUChatBlue,
+            icon: Icon(Icons.account_circle),
+            onPressed: () {
 //                TODO: Go to profile
-                Navigator.pushNamed(context, Profile.id);
-              },
-            ),
-          ],
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            MessagesStream(courseID: courseID),
-            Container(
-              padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
-              color: kGJUChatBlue,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                      child: TextField(
-                    onChanged: (value) {
-                      messageText = value;
-                    },
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    cursorColor: kGJUChatOrange,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Message...',
-                    ),
-                  )),
-                  FlatButton(
-                    onPressed: () {
-//                      TODO: Clear textfield using a messageTextController.clear()
-                      messageTextController.clear();
-                      if (messageText != '') {
-//                    TODO Send message if not empty...
-                        _firestore
-                            .collection('courses')
-                            .document(courseID)
-                            .collection('messages')
-                            .add({
-                          'text': messageText,
-                          'sender': loggedInUser.email,
-                          'date': DateTime.now(),
-                        });
-                      }
-                    },
-                    child: Icon(
-                      Icons.send,
-                      color: kGJUChatOrange,
-                    ),
+              Navigator.pushNamed(context, Profile.id);
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          MessagesStream(courseID: courseID),
+          Container(
+            padding: EdgeInsets.only(left: 16.0, top: 8.0, bottom: 8.0),
+            color: kGJUChatBlue,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                    child: TextField(
+                  onChanged: (value) {
+                    messageText = value;
+                  },
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
-                ],
-              ),
+                  cursorColor: kGJUChatOrange,
+                  decoration: InputDecoration(
+                    hintText: 'Enter Message...',
+                  ),
+                )),
+                FlatButton(
+                  onPressed: () {
+//                      TODO: Clear textfield using a messageTextController.clear()
+                    messageTextController.clear();
+                    if (messageText != '') {
+//                    TODO Send message if not empty...
+                      _firestore
+                          .collection('courses')
+                          .document(courseID)
+                          .collection('messages')
+                          .add({
+                        'text': messageText,
+                        'sender': loggedInUser.email,
+                        'date': DateTime.now(),
+                      });
+                    }
+                  },
+                  child: Icon(
+                    Icons.send,
+                    color: kGJUChatOrange,
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

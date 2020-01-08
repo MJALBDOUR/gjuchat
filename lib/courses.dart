@@ -40,28 +40,26 @@ class _CoursesState extends State<Courses> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: Image.asset('assets/images/logo.png'),
-            ),
-            title: Text('Courses', style: TextStyle(color: Colors.black54)),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.account_circle),
-                color: kGJUChatBlue,
-                onPressed: () {
-//                  TODO: Go to Profile
-                  Navigator.pushNamed(context, Profile.id);
-                },
-              ),
-            ],
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Image.asset('assets/images/logo.png'),
           ),
-          body: CoursesStream(),
+          title: Text('Courses', style: TextStyle(color: Colors.black54)),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.account_circle),
+              color: kGJUChatBlue,
+              onPressed: () {
+//                  TODO: Go to Profile
+                Navigator.pushNamed(context, Profile.id);
+              },
+            ),
+          ],
         ),
+        body: CoursesStream(),
       ),
     );
   }
