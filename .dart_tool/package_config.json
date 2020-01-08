@@ -2,12 +2,6 @@
   "configVersion": 2,
   "packages": [
     {
-      "name": "animated_text_kit",
-      "rootUri": "file:///Users/mj/development/flutter/.pub-cache/hosted/pub.dartlang.org/animated_text_kit-2.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "archive",
       "rootUri": "file:///Users/mj/development/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.11",
       "packageUri": "lib/",
@@ -260,7 +254,7 @@
       "languageVersion": "2.1"
     }
   ],
-  "generated": "2020-01-04T07:58:10.085401Z",
+  "generated": "2020-01-08T07:59:13.500316Z",
   "generator": "pub",
   "generatorVersion": "2.7.0"
 }
