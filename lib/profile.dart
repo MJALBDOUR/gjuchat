@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gjuchat/colors.dart';
@@ -11,6 +12,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,14 +29,40 @@ class _ProfileState extends State<Profile> {
         ),
         title: Text('Profile', style: TextStyle(color: Colors.black54)),
       ),
-      body: FlatButton(
-        child: Text('Log Out', style: TextStyle(color: Colors.white)),
-        color: kGJUChatBlue,
-        onPressed: () {
-          _auth.signOut();
-          Navigator.of(context).popUntil((route) => route.isFirst);
-          Navigator.pushNamed(context, ThankYou.id);
-        },
+      body: Align(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Column(children: <Widget>[
+              Text(
+                'Student name',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              Text(
+                'Student major',
+                style: TextStyle(fontSize: 20.0),
+              ),
+              Text(
+                'Student email',
+                style: TextStyle(fontSize: 20.0),
+              ),
+            ]),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: FlatButton(
+                child: Text('Log Out', style: TextStyle(color: Colors.white)),
+                color: kGJUChatBlue,
+                onPressed: () {
+                  _auth.signOut();
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.pushNamed(context, ThankYou.id);
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
