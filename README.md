@@ -1,4 +1,4 @@
-### This project is old and was created as a university course project to show off some real-time capabilities of firebase and flutter.
+### This project is old and was created to show off some real-time capabilities of firebase and flutter to the software engineering course professor at GJU.
 
 # gjuchat
 A real time chat app demo for students.
