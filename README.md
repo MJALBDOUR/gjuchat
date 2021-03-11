@@ -1,17 +1,14 @@
-### This project is old and was created as a university course project to show off real-time capabilites of firebase and flutter
+### This project is old and was created as a university course project to show off some real-time capabilities of firebase and flutter.
 
 # gjuchat
-
-Real Time chat app for students built with flutter/cloud firestore
+A real time chat app demo for students.
 
 ## Features
-- Android
-- iOS
-
+- Group chat only
 
 ## Tech Stack
 - Flutter - Dart
 - Firebase - Cloud Firestore
 
-## Theme
-Material Theme
+## UI
+Built in Material Theme
