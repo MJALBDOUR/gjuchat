@@ -1,6 +1,6 @@
 name: gjuchat
 description: Real Time chat app for students
-version: 1.0.0+1
+version: 0.2.0
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
